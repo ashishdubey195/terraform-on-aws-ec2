@@ -1,7 +1,11 @@
 # Create Security Group - SSH Traffic
+data "aws_vpc" "default" {
+  default = true
+}
 resource "aws_security_group" "vpc-ssh" {
   name        = "vpc-ssh"
   description = "Dev VPC SSH"
+  vpc_id = data.aws_vpc.default.id
   ingress {
     description = "Allow Port 22"
     from_port   = 22
@@ -27,6 +31,7 @@ resource "aws_security_group" "vpc-ssh" {
 resource "aws_security_group" "vpc-web" {
   name        = "vpc-web"
   description = "Dev VPC Web"
+  vpc_id = data.aws_vpc.default.id
   ingress {
     description = "Allow Port 80"
     from_port   = 80
