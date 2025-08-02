@@ -6,7 +6,6 @@ resource "aws_autoscaling_policy" "avg_cpu_policy_greater_than_xx" {
   policy_type = "TargetTrackingScaling" # Important Note: The policy type, either "SimpleScaling", "StepScaling" or "TargetTrackingScaling". If this value isn't provided, AWS will default to "SimpleScaling."    
   autoscaling_group_name = aws_autoscaling_group.my_asg.id 
   estimated_instance_warmup = 180 
-  depends_on = [ aws_autoscaling_group.my_asg, module.alb ]
                                                   # defaults to ASG default cooldown 300 seconds if not set
   # CPU Utilization is above 50
   target_tracking_configuration {
@@ -33,16 +32,15 @@ resource "aws_autoscaling_policy" "alb_target_requests_greater_than_yy" {
     }  
     target_value = 10.0
   }   
-
+  depends_on = [
+    aws_autoscaling_group.my_asg,
+    module.alb
+  ] 
   # Added depends_on to ensure the ALB and its listeners are fully created 
   # and routing traffic to the target group before this Target Tracking 
   # Scaling Policy is attached. Without this, Terraform may try to create 
   # the policy too early and fail with: 
   # "ValidationError: The load balancer does not route traffic to the target group"
-  depends_on = [
-    aws_autoscaling_group.my_asg,
-    module.alb
-  ] 
 }
 
 # Updated Nov2023
