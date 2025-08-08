@@ -23,7 +23,7 @@ phases:
   pre_build:
     on-failure: ABORT
     commands:
-      - echo "🧪 DEBUG: Running UPDATED buildspec on $(date)"
+      - echo "🧪 DEBUG: using UPDATED buildspec-dev.yml"
       - echo "CODEBUILD_SRC_DIR is: $CODEBUILD_SRC_DIR"
       - echo "Directory tree under CODEBUILD_SRC_DIR:"
       - ls -R "$CODEBUILD_SRC_DIR"
