@@ -15,15 +15,15 @@ phases:
     on-failure: ABORT
     commands:
       - echo "Installing Terraform version $TERRAFORM_VERSION"
-      - wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
-      - unzip terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
+      - wget https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
       - mv terraform /usr/local/bin/
       - terraform --version
 
   pre_build:
     on-failure: ABORT
     commands:
-      - echo "Terraform execution started on $(date)"
+      - echo "🧪 DEBUG: Running UPDATED buildspec on $(date)"
       - echo "CODEBUILD_SRC_DIR is: $CODEBUILD_SRC_DIR"
       - echo "Directory tree under CODEBUILD_SRC_DIR:"
       - ls -R "$CODEBUILD_SRC_DIR"
@@ -31,7 +31,6 @@ phases:
   build:
     on-failure: ABORT
     commands:
-      # ✅ Replace this with correct full path after confirming via pre_build output
       - cd "$CODEBUILD_SRC_DIR/22-IaC-DevOps-using-AWS-CodePipeline/Git-Repo-Files/terraform-manifests"
       - echo "Changed directory to terraform-manifests"
       - ls -lrt
