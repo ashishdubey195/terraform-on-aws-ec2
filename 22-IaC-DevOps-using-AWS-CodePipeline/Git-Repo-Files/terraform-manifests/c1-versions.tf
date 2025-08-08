@@ -1,6 +1,6 @@
 # Terraform Block
 terraform {
-  required_version = ">= 1.6" # which means any version equal & above 0.14 like 0.15, 0.16 etc and < 1.xx
+  required_version = ">= 1.12.2" # which means any version equal & above 0.14 like 0.15, 0.16 etc and < 1.xx
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -8,11 +8,11 @@ terraform {
     }
     null = {
       source = "hashicorp/null"
-      version = "~> 3.0"
+      version = "~> 3.2.4"
     }    
     random = {
       source = "hashicorp/random"
-      version = "~> 3.0"
+      version = "~> 3.7.2"
     }            
   }
   # Adding Backend as S3 for Remote State Storage
@@ -30,6 +30,9 @@ $HOME/.aws/credentials
 */
 
 # Create Random Pet Resource
-resource "random_pet" "this" {
-  length = 2
+resource "random_string" "myrandom" {
+  length = 4
+  upper = false
+}
+  
 }
