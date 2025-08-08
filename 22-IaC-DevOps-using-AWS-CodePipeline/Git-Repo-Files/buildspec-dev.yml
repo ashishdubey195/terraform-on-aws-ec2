@@ -15,7 +15,7 @@ phases:
     on-failure: ABORT
     commands:
       - echo "Installing Terraform version $TERRAFORM_VERSION"
-      - wget https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
       - unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
       - mv terraform /usr/local/bin/
       - terraform --version
@@ -25,7 +25,6 @@ phases:
     commands:
       - echo "🧪 DEBUG: using UPDATED buildspec-dev.yml"
       - echo "CODEBUILD_SRC_DIR is: $CODEBUILD_SRC_DIR"
-      - echo "Directory tree under CODEBUILD_SRC_DIR:"
       - ls -R "$CODEBUILD_SRC_DIR"
 
   build:
